@@ -1,11 +1,21 @@
-function Pet(){
+import {useState} from "react"
+
+function Pet({pet}){
+    
+    const [isToggled, setIsToggled] = useState(true)
+    
+    function handleClick() {
+        // console.log(isToggled)
+        setIsToggled(!isToggled)
+    }
+    
     return (
         <li className="pet">
-            <img src={"RENDER IMAGE"} alt={"RENDER PET NAME"}/>
-            <h4>{"CONDITIONALLY RENDER NAME OR ANIMAL TYPE"}</h4>
+            <img src={pet.image} alt={pet.name} onClick={handleClick} />
+            <h4>{isToggled ? pet.name : pet.animal_type}</h4>
             <p>
                 {
-                    "CONDITIONALLY RENDER WHETHER THE PET IS FROM A PET SHOP OR FROM THE WILD"
+                    pet.fromPetShop === true ? "From a Pet Shop" : "From the wild"
                 }
             </p>
             <button className="adopt-button">Adopt</button>
